@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { View,  Alert, Button,Image,TextInput,StyleSheet } from "react-native";
+import { View,  Alert,Text, Button,Image,TextInput,StyleSheet } from "react-native";
 import HomePage from "../home/Home"
 import Constants from "../../config/string"
+import CommonStyle from "../../style/comman";
+import CommonStrings from "../../config/string";
 
 export default class Login extends Component{
 
@@ -10,6 +12,10 @@ export default class Login extends Component{
         this.state = {
           email: '',
           password: '',
+          welcomeText : CommonStrings.str_welcome,
+          pmsCredentials : CommonStrings.str_credentials,
+          forgotPw : CommonStrings.str_forgotpassword
+
         }
       }
     
@@ -49,30 +55,31 @@ export default class Login extends Component{
     
     render(){
       return(
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-           <Image source={require('../../assets/ic_salogo.png')} style={styles.image} /> 
-            <TextInput style ={styles.input} placeholder ="Email" onChangeText={(text) => this.setEmail(text)}/>
-            <TextInput style ={styles.input} placeholder ="Email" onChangeText={(text) => this.setPassword(text)}/>
+        <View style={CommonStyle.container}>
+          
+           <Image source={require('../../assets/ic_salogo.png')} style={CommonStyle.image} /> 
+           <View style ={CommonStyle.verticalView}>
+             <Text style={styles.titleText}>{this.state.welcomeText}</Text>
+             <Text style={styles.smallText}>{this.state.pmsCredentials}</Text>
+             <TextInput style ={CommonStyle.input} placeholder ="Email" onChangeText={(text) => this.setEmail(text)}/>
+             <TextInput style ={CommonStyle.input} placeholder ="Password" onChangeText={(text) => this.setPassword(text)}/>
              <Button title= "Submit" onPress={this.validateData}/> 
-
+             <Text style={styles.smallText}>{this.state.forgotPw}</Text>
+           </View>
         </View>
       );
     }}
 
-      const styles = StyleSheet.create({
-        input: {
-          height: 45,
-          borderColor: 'gray',
-          borderWidth: 1,
-          borderRadius: 5,
-          marginBottom: 20,
-          fontSize: 20,
-          paddingLeft: 5,
-          paddingRight: 5,
-          backgroundColor: '#FFFFFF',
+    const styles = StyleSheet.create({
+        titleText: {
+          width:'100%',
+          fontSize: 18,
+          fontWeight: 'bold',
         },
-    image:{
-        height:100,
-        
-    }})
+        smallText: {
+          width:'100%',
+          fontSize: 14,
+          marginBottom:5
+        },
+   })
    
