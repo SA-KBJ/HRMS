@@ -6,7 +6,17 @@ const baseStyles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: 'white'
-    }
+    },
+    verticalView: {
+      alignItems:'center',    
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      flexDirection:'column'
+    },
+    horizontalView: {
+
+      flexDirection:'row'
+      }
   })
 
-  export default baseStyles;
+export default baseStyles;
