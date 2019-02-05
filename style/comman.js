@@ -6,7 +6,37 @@ const baseStyles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: 'white'
-    }
+    },
+    verticalView: {
+      alignItems:'center',    
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      flexDirection:'column'
+    },
+    horizontalView: {
+      flexDirection:'row'
+      },
+      buttonStyle:{
+        flexDirection :'row',
+        flex : 1,
+        fontSize:12,
+        text
+      },
+      input: {
+        height: 45,
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 20,
+        fontSize: 20,
+        paddingLeft: 5,
+        paddingRight: 5,
+        backgroundColor: '#FFFFFF',
+      },image: {
+        width : 100,
+        height: 100,
+        margin:10
+         },
   })
 
-  export default baseStyles;
+export default baseStyles;
