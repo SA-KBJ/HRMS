@@ -52,7 +52,7 @@ export default class NewLeave extends React.Component {
 
                 <Text style={styles.text}>{strings.lable_watcher}</Text>
 
-                <View style={styles.innerContainer}>
+                <View style={styles.btnContainer}>
                     <Button
                         style={styles.button}
                         title={strings.lable_send_request}
@@ -89,9 +89,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
 
-    innerContainer: {
+    btnContainer: {
         flexDirection: 'row',
-        marginTop: dimen.marginSmall
+        marginTop: dimen.marginSmall,
+        marginLeft:dimen.marginMedium
     },
 
     icon: {
@@ -102,6 +103,6 @@ const styles = StyleSheet.create({
         margin: dimen.marginMedium,
     },
     button: {
-        margin: dimen.marginMedium,
+        margin: 60,
     }
 });
