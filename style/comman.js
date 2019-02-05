@@ -5,7 +5,7 @@ const baseStyles = StyleSheet.create({
       flex: 1,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: 'white'
+      backgroundColor: 'red'
     },
     verticalView: {
       alignItems:'center',    
