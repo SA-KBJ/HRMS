@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { View,  Alert,Text, Button,Image,TextInput,StyleSheet } from "react-native";
-import HomePage from "../home/Home"
-import Constants from "../../config/string"
+import HomePage from "../home/Home";
+import Constants from "../../config/string";
 import CommonStyle from "../../style/comman";
 import CommonStrings from "../../config/string";
+<<<<<<< HEAD
 import {Input}  from "react-native-elements";
+=======
+import {Input} from "react-native-elements";
+
+>>>>>>> commit to resolve check out issue
 
  class Login extends React.Component{
 
@@ -60,6 +65,7 @@ import {Input}  from "react-native-elements";
           
            <Image source={require('../../assets/ic_salogo.png')} style={CommonStyle.image} /> 
            <View style ={CommonStyle.verticalView}>
+           <Input placeholder ="Test"></Input>
              <Text style={styles.titleText}>{this.state.welcomeText}</Text>
              <Text style={styles.smallText}>{this.state.pmsCredentials}</Text>
             {/* <Input placeholder ="hello user"/>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Image,Text,View,StyleSheet } from "react-native";
 import CommonStyle from "../../style/comman";
 import CommonStrings from "../../config/string";
+import {Input} from "react-native-elements";
 
 export default class Splash extends Component {
   constructor(props){
@@ -17,13 +18,15 @@ export default class Splash extends Component {
     // eslint-disable-line class-methods-use-this
     return (
       <View style ={CommonStyle.container}>
-      <View style ={CommonStyle.horizontalView}>
+                 <Input placeholder ="Test"></Input>
+
+      {/* <View style ={CommonStyle.horizontalView}>
         <Image source={require("../../assets/ic_salogo.png")} style={Style.image}/>
         <View style={CommonStyle.verticalView}>
           <Text style ={Style.titleText}>{this.state.companyname}</Text>
           <Text style ={Style.smallText}>{this.state.Companyquate}</Text>
         </View>
-        </View>
+        </View> */}
       </View>
       
     );
