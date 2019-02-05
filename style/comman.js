@@ -20,7 +20,6 @@ const baseStyles = StyleSheet.create({
         flexDirection :'row',
         flex : 1,
         fontSize:12,
-        text
       },
       input: {
         height: 45,
