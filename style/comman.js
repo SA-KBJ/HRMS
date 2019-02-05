@@ -20,9 +20,9 @@ const baseStyles = StyleSheet.create({
         flexDirection :'row',
         flex : 1,
         fontSize:12,
-        text
-      },
+              },
       input: {
+        width:"70%",
         height: 45,
         borderColor: 'gray',
         borderWidth: 1,

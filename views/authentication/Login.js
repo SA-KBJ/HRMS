@@ -4,8 +4,9 @@ import HomePage from "../home/Home"
 import Constants from "../../config/string"
 import CommonStyle from "../../style/comman";
 import CommonStrings from "../../config/string";
+import {Input}  from "react-native-elements";
 
-export default class Login extends Component{
+ class Login extends React.Component{
 
     constructor(props) {
         super(props)
@@ -61,8 +62,10 @@ export default class Login extends Component{
            <View style ={CommonStyle.verticalView}>
              <Text style={styles.titleText}>{this.state.welcomeText}</Text>
              <Text style={styles.smallText}>{this.state.pmsCredentials}</Text>
-             <TextInput style ={CommonStyle.input} placeholder ="Email" onChangeText={(text) => this.setEmail(text)}/>
-             <TextInput style ={CommonStyle.input} placeholder ="Password" onChangeText={(text) => this.setPassword(text)}/>
+            {/* <Input placeholder ="hello user"/>
+             */}
+             {/* <Input containerStyle ={CommonStyle.input} placeholder ='Email' onChangeText={(text) => this.setEmail(text)}/>
+             <Input containerStyle ={CommonStyle.input} placeholder ='Password' onChangeText={(text) => this.setPassword(text)}/> */}
              <Button title= "Submit" onPress={this.validateData}/> 
              <Text style={styles.smallText}>{this.state.forgotPw}</Text>
            </View>
@@ -82,4 +85,5 @@ export default class Login extends Component{
           marginBottom:5
         },
    })
-   
+
+   export default Login;
