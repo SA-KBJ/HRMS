@@ -24,7 +24,7 @@ export default  appString = {
   str_credentials : "Login using PMS credentials to acess",
   placeholder_email :"Email",
   placeholder_password :"Password",
-  action_login:"Login",
+  action_login:"LOGIN",
   str_forgotpassword :"Forgot password?",
   company_name :"Solution Anlalysts",
   company_qoute :"Analysing needs,delivering solutions"
