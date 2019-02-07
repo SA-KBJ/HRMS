@@ -8,7 +8,7 @@ export default  appString = {
   lable_date: 'Date:',
   lable_assign_to: 'Assign To:',
   lable_reason: 'Reason:',
-  lable_watcher: 'Watcher',
+  lable_watcher: 'Watcher:',
   lable_send_request :'Send Request',
   lable_do_nothing :'Do Nothing, GO Back',
 

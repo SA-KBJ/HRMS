@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Picker, Alert, TouchableOpacity, DatePickerAndroid } from 'react-native';
 import colors from '../../config/colors'
 import strings from '../../config/string'
 import dimen from '../../config/dimen'
@@ -9,60 +9,106 @@ import { CheckBox, Input, Image, Button } from 'react-native-elements'
 
 export default class NewLeave extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            checked: false
+            isMultipleLeave: false,
+            Watchers: ['Add Watcher', 'a', 'b', 'c', 'd', 'e'],
+            selectedWatcher: 'Add Watcher'
         };
     }
 
 
     render() {
 
-        const { checked } = this.state;
+        const { isMultipleLeave } = this.state;
+
+         showDataPicker = () => {
+            try {
+                const {action, year, month, day} =  DatePickerAndroid.open({
+                  date: new Date()
+                });
+
+                if (action !== DatePickerAndroid.dismissedAction) {
+                    // Selected year, month (0-11), day
+                  }
+                  if (action !== DatePickerAndroid.dateSetAction) {
+                    // Selected year, month (0-11), day
+                  }
+              } catch ({code, message}) {
+                console.warn('Cannot open date picker', message);
+              }
+        }
+        sendRequestClick = () => {
+            Alert.alert('You tapped the sendRequestClick!');
+        }
+        goBackClick = () => {
+            Alert.alert('You tapped the goBackClick!');
+        }
 
         return (
-            <View style={styles.container}>
 
+            <View style={styles.container}>
                 <CheckBox
                     title={strings.lable_Multiple_leave}
-                    checked={checked}
+                    checked={isMultipleLeave}
                     checkedColor={colors.colorPrimary}
-                    onPress={() => this.setState({ checked: !checked })}
+                    onPress={() => this.setState({ isMultipleLeave: !isMultipleLeave })}
                 />
-                <Text style={styles.text}>{strings.lable_date}</Text>
+                <Text style={styles.textTitle}>{strings.lable_date}</Text>
+                <TouchableOpacity onPress={() => showDataPicker()}>
+                    <Input
+                        inputStyle={styles.input}
+                        labelStyle={styles.lableInput}
+                        placeholder={strings.select_date}
+                        editable={false}
+                        rightIcon={
+                            <Image style={styles.icon}
+                                source={images.calander} />
+                        }
+                    />
+                </TouchableOpacity>
+
+                <Text style={styles.textTitle}>{strings.lable_reason}</Text>
                 <Input
-                    style={styles.input}
-                    placeholder={strings.select_date}
-                    rightIcon={
-                        <Image style={styles.icon}
-                            source={images.calander} />
-                    }
-                />
-                <Text style={styles.text}>{strings.lable_reason}</Text>
-                <Input
-                    style={styles.input}
                     placeholder={strings.place_holder_reason}
                 />
 
-                <View style={styles.innerContainer}>
-                    <Text style={styles.text}>{strings.lable_assign_to}</Text>
-                    <Text style={styles.planText}>Ankit Thakkar </Text>
+                <View style={styles.assignContainer}>
+                    <Text style={styles.textTitle}>{strings.lable_assign_to}</Text>
+                    <Text style={styles.textValue}>Ankit Thakkar </Text>
                 </View>
 
-                <Text style={styles.text}>{strings.lable_watcher}</Text>
+                <Text style={styles.textTitle}>{strings.lable_watcher}</Text>
+
+                <Picker
+                    selectedValue={this.state.selectedWatcher}
+                    onValueChange={(watcher, itemIndex) => (this.setState({ selectedWatcher: watcher }))}
+                    style={styles.watcherPicker}
+                    mode="dropdown">
+                    {
+                        this.state.Watchers.map((watcher, index) => {
+                            return <Picker.Item color={colors.colorPrimary} key={index} value={watcher} label={watcher} />
+                        })
+                    }
+                </Picker>
 
                 <View style={styles.btnContainer}>
                     <Button
-                        style={styles.button}
+                        buttonStyle={styles.buttonRequest}
                         title={strings.lable_send_request}
+                        onPress={() => { sendRequestClick() }}
                     />
                     <Button
-                        style={styles.button}
-                        title= {strings.lable_do_nothing}
+                        buttonStyle={styles.buttonGoback}
+                        title={strings.lable_do_nothing}
+                        onPress={() => { goBackClick() }}
                     />
+
                 </View>
-            </View>
+
+
+            </View >
 
         );
     }
@@ -76,33 +122,54 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         flex: 1,
         backgroundColor: colors.white,
-        // alignItems: 'center',
+        // padding: dimen.marginMedium,
         justifyContent: 'center'
+
     },
 
     input: {
-        margin: dimen.marginMedium
+        width: '100%',
+        color: colors.colorPrimary
     },
 
-    text: {
-        margin: dimen.marginMedium,
-        fontWeight: 'bold'
-    },
 
-    btnContainer: {
-        flexDirection: 'row',
-        marginTop: dimen.marginSmall,
-        marginLeft:dimen.marginMedium
+    textTitle: {
+        color: colors.textTitleGray,
+        marginTop: dimen.marginMedium,
+        marginLeft: dimen.marginSmall,
+        fontWeight: 'bold',
+        fontSize: dimen.textMedium
+
     },
 
     icon: {
         width: 50,
         height: 50
     },
-    planText: {
-        margin: dimen.marginMedium,
+    textValue: {
+        marginTop: dimen.marginMedium,
+        marginLeft: dimen.marginSmall,
+        color: colors.textValueGray,
     },
-    button: {
-        margin: 60,
+
+    assignContainer: {
+        flexDirection: 'row',
+    },
+    watcherPicker: {
+        marginLeft: dimen.marginTiny
+    },
+
+    btnContainer: {
+        marginTop: dimen.marginMedium,
+        marginLeft: dimen.marginSmall,
+        flexDirection: 'row',
+    },
+    buttonRequest: {
+        backgroundColor: colors.colorPrimary
+    },
+    buttonGoback: {
+        backgroundColor: colors.colorPrimary,
+        marginLeft: dimen.marginSmall,
     }
+
 });

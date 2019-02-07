@@ -15,7 +15,17 @@ const dimen = {
   marginMedium: 15,
   marginLarge: 20,
   marginXlarge: 25,
-  marginBig: 50
+  marginBig: 50,
+
+  // Text size
+  textTiny: 5,
+  textSmall: 10,
+  textMedium: 15,
+  textLarge: 20,
+  textXlarge: 25,
+  textBig: 50,
+
+
 };
 
 export default dimen;

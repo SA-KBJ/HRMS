@@ -6,7 +6,9 @@ const colors = {
     colorPrimary : '#1E7B8B',
     colorPrimaryDark : '#ff21648c',
 
-    buttonBg: '#FFB233'
+    buttonBg: '#FFB233',
+    textTitleGray:"#676A6C",
+    textValueGray :"#A9ABAB"
   };
 
   export default colors;

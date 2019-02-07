@@ -1,12 +1,14 @@
 import React from 'react';
 import Setup from './src/boot/setup'
 
+import NewLeave from './views/leave/NewLeave'
 
 export default class App extends React.Component {
   render() {
     return (
   
-      <Setup/>
+      <NewLeave/>
+      // <Setup/>
     );
   }
 }

@@ -31,7 +31,8 @@ const baseStyles = StyleSheet.create({
         paddingLeft: 5,
         paddingRight: 5,
         backgroundColor: '#FFFFFF',
-      },image: {
+      },
+      image: {
         width : 100,
         height: 100,
         margin:10
