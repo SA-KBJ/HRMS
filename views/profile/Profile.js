@@ -4,7 +4,7 @@ import colors from '../../config/colors';
 import dimen from '../../config/dimen';
 import CommonStyle from "../../style/comman";
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import {Tab} from '../../config/navigations';
+import Tab from '../../config/navigations';
 
 
 class Profile extends React.Component{
