@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19003,
+  "devToolsPort": 19004,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 1874,
-  "expoServerNgrokUrl": "https://xi-hg8.anonymous.hrms.exp.direct",
-  "packagerNgrokUrl": "https://packager.xi-hg8.anonymous.hrms.exp.direct",
-  "ngrokPid": 1891
+  "packagerPid": 7222,
+  "expoServerNgrokUrl": "https://cp-pzp.anonymous.hrms.exp.direct",
+  "packagerNgrokUrl": "https://packager.cp-pzp.anonymous.hrms.exp.direct",
+  "ngrokPid": 7238
 }
