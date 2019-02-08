@@ -53,7 +53,7 @@ export default class Login extends Component {
   navigateToHomePage = () => {
     this.props.navigation.navigate('Home');
   }
-  navigateToForgotPasswordPage = () => {
+  navigateToForgotPasswordPage = () => { 
     this.props.navigation.navigate('ForgotPassword');
   }
 

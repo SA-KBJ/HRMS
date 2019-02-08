@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Picker, Alert, TouchableOpacity, DatePickerAndroid, ToastAndroid } from 'react-native';
 import colors from '../../config/colors'
 import strings from '../../config/string'
 import dimen from '../../config/dimen'
@@ -9,60 +9,170 @@ import { CheckBox, Input, Image, Button } from 'react-native-elements'
 
 export default class NewLeave extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            checked: false
+            isMultipleLeave: false,
+            reason: "",
+            Watchers: ['Add Watcher', 'a', 'b', 'c', 'd', 'e'],
+            selectedWatcher: strings.promt_watcher_picker,
+            selectedStartDate: "",
+            selectedEndDate: "",
+            assignName: "Ankit Thakkar"
         };
     }
 
 
     render() {
 
-        const { checked } = this.state;
+        const { isMultipleLeave } = this.state;
+
+        validate = () => {
+
+            let massage = ""
+          
+            if (this.state.selectedStartDate == "") {
+                if (this.state.isMultipleLeave) {
+                    massage = strings.error_select_date
+                } else {
+                    massage = strings.error_select_start_date
+                }
+            } else if (this.state.selectedEndDate == "" && this.state.isMultipleLeave) {
+                massage = strings.error_select_end_date
+            } else if (this.state.reason == "") {
+                massage = strings.error_empty_reason
+            }
+
+            console.log(massage + "" + this.state.reason)
+
+            if (massage != "") {
+                ToastAndroid.show(massage, ToastAndroid.SHORT);
+                return false
+            } else {
+                ToastAndroid.show("Success", ToastAndroid.SHORT);
+                return true
+            }
+
+        }
+
+        showDataPicker = async (isfrom) => {
+            try {
+                const { action, year, month, day } = await DatePickerAndroid.open({
+                    date: new Date()
+                });
+                if (action == DatePickerAndroid.dateSetAction) {
+                    console.log(isfrom)
+                    if (isfrom == "start") {
+                        this.setState({ selectedStartDate: day + '/' + month + '/' + year })
+                    } else {
+                        this.setState({ selectedEndDate: day + '/' + month + '/' + year })
+                    }
+                    console.log(day + '/' + month + '/' + year);
+                }
+            } catch ({ code, message }) {
+                console.warn('Cannot open date picker', message);
+            }
+        }
+        sendRequestClick = () => {
+            if (validate()) {
+                console.log("success")
+            } else {
+                console.log("fail")
+            }
+        }
+        goBackClick = () => {
+            
+        }
 
         return (
-            <View style={styles.container}>
 
+            <View style={styles.container}>
                 <CheckBox
                     title={strings.lable_Multiple_leave}
-                    checked={checked}
+                    checked={isMultipleLeave}
                     checkedColor={colors.colorPrimary}
-                    onPress={() => this.setState({ checked: !checked })}
+                    onPress={() => this.setState({ isMultipleLeave: !isMultipleLeave })}
                 />
-                <Text style={styles.text}>{strings.lable_date}</Text>
+                <Text style={styles.textTitle}>{this.state.isMultipleLeave ? strings.lable_start_date : strings.lable_date}</Text>
+
+                <TouchableOpacity onPress={() => showDataPicker("start")}>
+                    <Input
+                        inputStyle={styles.input}
+                        labelStyle={styles.lableInput}
+                        placeholder={this.state.isMultipleLeave ? strings.select_start_date : strings.select_date}
+                        editable={false}
+                        value={this.state.selectedStartDate}
+                        rightIcon={
+                            <Image style={styles.icon}
+                                source={images.calander} />
+                        }
+                    />
+                </TouchableOpacity>
+
+                {this.state.isMultipleLeave ?
+                    <Text style={styles.textTitle}>{strings.lable_end_date}</Text>
+                    : null}
+
+                {this.state.isMultipleLeave ?
+                    <TouchableOpacity onPress={() => showDataPicker("end")}>
+                        <Input
+                            inputStyle={styles.input}
+                            labelStyle={styles.lableInput}
+                            placeholder={strings.select_end_date}
+                            editable={false}
+                            value={this.state.selectedEndDate}
+                            rightIcon={
+                                <Image style={styles.icon}
+                                    source={images.calander} />
+                            }
+                        />
+                    </TouchableOpacity>
+                    : null}
+
+
+                <Text style={styles.textTitle}
+                    onChangeText={this.handleChange}
+                >{strings.lable_reason}</Text>
                 <Input
-                    style={styles.input}
-                    placeholder={strings.select_date}
-                    rightIcon={
-                        <Image style={styles.icon}
-                            source={images.calander} />
-                    }
-                />
-                <Text style={styles.text}>{strings.lable_reason}</Text>
-                <Input
-                    style={styles.input}
                     placeholder={strings.place_holder_reason}
+                    onChangeText={(value) => this.setState({ reason: value })}
                 />
 
-                <View style={styles.innerContainer}>
-                    <Text style={styles.text}>{strings.lable_assign_to}</Text>
-                    <Text style={styles.planText}>Ankit Thakkar </Text>
+                <View style={styles.assignContainer}>
+                    <Text style={styles.textTitle}>{strings.lable_assign_to}</Text>
+                    <Text style={styles.textValue}>{this.state.assignName} </Text>
                 </View>
 
-                <Text style={styles.text}>{strings.lable_watcher}</Text>
+                <Text style={styles.textTitle}>{strings.lable_watcher}</Text>
+
+                <Picker
+                    selectedValue={this.state.selectedWatcher}
+                    onValueChange={(watcher, itemIndex) => (this.setState({ selectedWatcher: watcher }))}
+                    style={styles.watcherPicker}
+                    mode="dropdown">
+                    {
+                        this.state.Watchers.map((watcher, index) => {
+                            return <Picker.Item color={colors.colorPrimary} key={index} value={watcher} label={watcher} />
+                        })
+                    }
+                </Picker>
 
                 <View style={styles.btnContainer}>
                     <Button
-                        style={styles.button}
+                        buttonStyle={styles.buttonRequest}
                         title={strings.lable_send_request}
+                        onPress={() => { sendRequestClick() }}
                     />
                     <Button
-                        style={styles.button}
-                        title= {strings.lable_do_nothing}
+                        buttonStyle={styles.buttonGoback}
+                        title={strings.lable_do_nothing}
+                        onPress={() => { goBackClick() }}
                     />
+
                 </View>
-            </View>
+
+
+            </View >
 
         );
     }
@@ -76,33 +186,55 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         flex: 1,
         backgroundColor: colors.white,
-        // alignItems: 'center',
-        justifyContent: 'center'
+        marginTop: dimen.marginBig,
+        // padding: dimen.marginMedium,
+        // justifyContent: 'center'
+
     },
 
     input: {
-        margin: dimen.marginMedium
+        width: '100%',
+        color: colors.colorPrimary
     },
 
-    text: {
-        margin: dimen.marginMedium,
-        fontWeight: 'bold'
-    },
 
-    btnContainer: {
-        flexDirection: 'row',
-        marginTop: dimen.marginSmall,
-        marginLeft:dimen.marginMedium
+    textTitle: {
+        color: colors.textTitleGray,
+        marginTop: dimen.marginMedium,
+        marginLeft: dimen.marginSmall,
+        fontWeight: 'bold',
+        fontSize: dimen.textMedium
+
     },
 
     icon: {
-        width: 50,
-        height: 50
+        width: 40,
+        height: 40
     },
-    planText: {
-        margin: dimen.marginMedium,
+    textValue: {
+        marginTop: dimen.marginMedium,
+        marginLeft: dimen.marginSmall,
+        color: colors.textValueGray,
     },
-    button: {
-        margin: 60,
+
+    assignContainer: {
+        flexDirection: 'row',
+    },
+    watcherPicker: {
+        marginLeft: dimen.marginTiny
+    },
+
+    btnContainer: {
+        marginTop: dimen.marginMedium,
+        marginLeft: dimen.marginSmall,
+        flexDirection: 'row',
+    },
+    buttonRequest: {
+        backgroundColor: colors.colorPrimary
+    },
+    buttonGoback: {
+        backgroundColor: colors.colorPrimary,
+        marginLeft: dimen.marginSmall,
     }
+
 });

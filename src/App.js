@@ -1,6 +1,6 @@
-const { Navigation } = require('react-native-navigation');
 const { registerScreens } = require('../views/screens');
 import React, { Component } from "react";
+
 
 //Start you app navigation from here
 
@@ -31,28 +31,4 @@ Navigation.events().registerAppLaunchedListener(() => {
      }
     
 }
-// export default class App extends React.Component{
-    
-//     constructor(props){
-//         super(props)
-//         this.state ={
-//             timePassed:false,
-//         }
-//     }
-    
-//     render()
-//     {
-//         var redirectScreen = <Splash/>
 
-//         if(Constants.isLoggedIn){
-//             redirectScreen = <Home/>
-//         }
-//         else{
-//             setTimeout(() => { this.setState({ timePassed: true }) }, 3000)
-//              if(this.state.timePassed){
-//                 redirectScreen = <Login/>
-//              }
-//         }
-//         return redirectScreen
-//     }
-// }
