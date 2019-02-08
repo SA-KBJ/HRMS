@@ -8,7 +8,8 @@ const colors = {
 
     buttonBg: '#FFB233',
     textTitleGray:"#676A6C",
-    textValueGray :"#A9ABAB"
+    textValueGray :"#A9ABAB",
+    date_icon :"#4592A3"
   };
 
   export default colors;

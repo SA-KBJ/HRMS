@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Picker, Alert, TouchableOpacity, DatePickerAndroid, ToastAndroid } from 'react-native';
+import { StyleSheet, Text, View, Picker, TouchableOpacity, DatePickerAndroid, ToastAndroid } from 'react-native';
 import colors from '../../config/colors'
 import strings from '../../config/string'
 import dimen from '../../config/dimen'
