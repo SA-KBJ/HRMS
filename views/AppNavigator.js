@@ -3,8 +3,6 @@ import Login from './authentication/Login'
 import ForgotPassword from './forgotpassword/ForgotPassword'
 import Splash from './splash/Splash'
 import { createStackNavigator } from "react-navigation";
-
-
 const AppNavigator= createStackNavigator({
     Splash:  {screen: Splash},
     Login:{screen:Login},
