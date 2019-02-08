@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Picker, Alert, TouchableOpacity, DatePickerAndroid } from 'react-native';
+import { StyleSheet, Text, View, Picker, Alert, TouchableOpacity, DatePickerAndroid, ToastAndroid } from 'react-native';
 import colors from '../../config/colors'
 import strings from '../../config/string'
 import dimen from '../../config/dimen'
@@ -13,8 +13,12 @@ export default class NewLeave extends React.Component {
         super(props);
         this.state = {
             isMultipleLeave: false,
+            reason: "",
             Watchers: ['Add Watcher', 'a', 'b', 'c', 'd', 'e'],
-            selectedWatcher: 'Add Watcher'
+            selectedWatcher: strings.promt_watcher_picker,
+            selectedStartDate: "",
+            selectedEndDate: "",
+            assignName: "Ankit Thakkar"
         };
     }
 
@@ -23,27 +27,61 @@ export default class NewLeave extends React.Component {
 
         const { isMultipleLeave } = this.state;
 
-         showDataPicker = () => {
-            try {
-                const {action, year, month, day} =  DatePickerAndroid.open({
-                  date: new Date()
-                });
+        validate = () => {
 
-                if (action !== DatePickerAndroid.dismissedAction) {
-                    // Selected year, month (0-11), day
-                  }
-                  if (action !== DatePickerAndroid.dateSetAction) {
-                    // Selected year, month (0-11), day
-                  }
-              } catch ({code, message}) {
+            let massage = ""
+          
+            if (this.state.selectedStartDate == "") {
+                if (this.state.isMultipleLeave) {
+                    massage = strings.error_select_date
+                } else {
+                    massage = strings.error_select_start_date
+                }
+            } else if (this.state.selectedEndDate == "" && this.state.isMultipleLeave) {
+                massage = strings.error_select_end_date
+            } else if (this.state.reason == "") {
+                massage = strings.error_empty_reason
+            }
+
+            console.log(massage + "" + this.state.reason)
+
+            if (massage != "") {
+                ToastAndroid.show(massage, ToastAndroid.SHORT);
+                return false
+            } else {
+                ToastAndroid.show("Success", ToastAndroid.SHORT);
+                return true
+            }
+
+        }
+
+        showDataPicker = async (isfrom) => {
+            try {
+                const { action, year, month, day } = await DatePickerAndroid.open({
+                    date: new Date()
+                });
+                if (action == DatePickerAndroid.dateSetAction) {
+                    console.log(isfrom)
+                    if (isfrom == "start") {
+                        this.setState({ selectedStartDate: day + '/' + month + '/' + year })
+                    } else {
+                        this.setState({ selectedEndDate: day + '/' + month + '/' + year })
+                    }
+                    console.log(day + '/' + month + '/' + year);
+                }
+            } catch ({ code, message }) {
                 console.warn('Cannot open date picker', message);
-              }
+            }
         }
         sendRequestClick = () => {
-            Alert.alert('You tapped the sendRequestClick!');
+            if (validate()) {
+                console.log("success")
+            } else {
+                console.log("fail")
+            }
         }
         goBackClick = () => {
-            Alert.alert('You tapped the goBackClick!');
+            
         }
 
         return (
@@ -55,13 +93,15 @@ export default class NewLeave extends React.Component {
                     checkedColor={colors.colorPrimary}
                     onPress={() => this.setState({ isMultipleLeave: !isMultipleLeave })}
                 />
-                <Text style={styles.textTitle}>{strings.lable_date}</Text>
-                <TouchableOpacity onPress={() => showDataPicker()}>
+                <Text style={styles.textTitle}>{this.state.isMultipleLeave ? strings.lable_start_date : strings.lable_date}</Text>
+
+                <TouchableOpacity onPress={() => showDataPicker("start")}>
                     <Input
                         inputStyle={styles.input}
                         labelStyle={styles.lableInput}
-                        placeholder={strings.select_date}
+                        placeholder={this.state.isMultipleLeave ? strings.select_start_date : strings.select_date}
                         editable={false}
+                        value={this.state.selectedStartDate}
                         rightIcon={
                             <Image style={styles.icon}
                                 source={images.calander} />
@@ -69,14 +109,38 @@ export default class NewLeave extends React.Component {
                     />
                 </TouchableOpacity>
 
-                <Text style={styles.textTitle}>{strings.lable_reason}</Text>
+                {this.state.isMultipleLeave ?
+                    <Text style={styles.textTitle}>{strings.lable_end_date}</Text>
+                    : null}
+
+                {this.state.isMultipleLeave ?
+                    <TouchableOpacity onPress={() => showDataPicker("end")}>
+                        <Input
+                            inputStyle={styles.input}
+                            labelStyle={styles.lableInput}
+                            placeholder={strings.select_end_date}
+                            editable={false}
+                            value={this.state.selectedEndDate}
+                            rightIcon={
+                                <Image style={styles.icon}
+                                    source={images.calander} />
+                            }
+                        />
+                    </TouchableOpacity>
+                    : null}
+
+
+                <Text style={styles.textTitle}
+                    onChangeText={this.handleChange}
+                >{strings.lable_reason}</Text>
                 <Input
                     placeholder={strings.place_holder_reason}
+                    onChangeText={(value) => this.setState({ reason: value })}
                 />
 
                 <View style={styles.assignContainer}>
                     <Text style={styles.textTitle}>{strings.lable_assign_to}</Text>
-                    <Text style={styles.textValue}>Ankit Thakkar </Text>
+                    <Text style={styles.textValue}>{this.state.assignName} </Text>
                 </View>
 
                 <Text style={styles.textTitle}>{strings.lable_watcher}</Text>
@@ -122,8 +186,9 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         flex: 1,
         backgroundColor: colors.white,
+        marginTop: dimen.marginBig,
         // padding: dimen.marginMedium,
-        justifyContent: 'center'
+        // justifyContent: 'center'
 
     },
 
@@ -143,8 +208,8 @@ const styles = StyleSheet.create({
     },
 
     icon: {
-        width: 50,
-        height: 50
+        width: 40,
+        height: 40
     },
     textValue: {
         marginTop: dimen.marginMedium,
