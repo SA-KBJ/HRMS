@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import { Image,Text,View,StyleSheet } from "react-native";
 import CommonStyle from "../../style/comman";
 import CommonStrings from "../../config/string";
+import Constants from  "../../config/constants"
 
 export default class Splash extends Component {
+
   constructor(props){
     super(props)
     this.state={
@@ -12,7 +14,22 @@ export default class Splash extends Component {
 
     }
   }         
-  
+
+  componentDidMount() {
+    setTimeout(() => {
+       this.load();
+          }, 2000);
+    }
+
+   load = () => {
+     if(Constants.isLoggeIn){
+      this.props.navigation.navigate('Home');
+     }else{
+      this.props.navigation.navigate('Login');
+     }
+      
+    };
+
   render() {
     // eslint-disable-line class-methods-use-this
     return (
@@ -45,3 +62,5 @@ const Style = StyleSheet.create({
     fontSize: 14,
   },
 })
+
+

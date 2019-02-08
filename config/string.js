@@ -1,6 +1,6 @@
 export default  appString = {
   dsLogo: "Please eneter user name",
-
+  isLoggedIn : false,
 
 
   // Leave String

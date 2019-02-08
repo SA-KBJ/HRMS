@@ -1,5 +1,5 @@
 const images = {
-    dsLogo: require('../assets/icon.png'),
+    dsLogo: require('../assets/ic_salogo.png'),
     calander : require('../assets/calander.png')
   };
   

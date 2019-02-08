@@ -1,7 +1,7 @@
 
 const constants = {
-   name : "HRMS"
+   name : "HRMS",
+   isLoggeIn : false
   
 }
-  
-  export default constants;
+export default constants;

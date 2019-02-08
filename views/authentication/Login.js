@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { View, Alert, Text, Image, StyleSheet,KeyboardAvoidingView } from "react-native";
-import HomePage from "../home/Home"
 import CommonStyle from "../../style/comman";
 import CommonStrings from "../../config/string";
 import { Input, Button } from 'react-native-elements'
@@ -52,7 +51,10 @@ export default class Login extends Component {
     )
   }
   navigateToHomePage = () => {
-    <HomePage />
+    this.props.navigation.navigate('Home');
+  }
+  navigateToForgotPasswordPage = () => {
+    this.props.navigation.navigate('ForgotPassword');
   }
 
   render() {
@@ -71,7 +73,7 @@ export default class Login extends Component {
          <Button buttonStyle={styles.buttonStyle} title={CommonStrings.action_login} onPress={this.validateData} />
          </View>
        
-          <Text style={styles.forgotStyle}>{this.state.forgotPw}</Text>
+          <Text style={styles.forgotStyle} onPress ={this.navigateToForgotPasswordPage}>{this.state.forgotPw}</Text>
         </View>
       </View>
       </KeyboardAvoidingView>
