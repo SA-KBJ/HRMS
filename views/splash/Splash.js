@@ -5,7 +5,9 @@ import CommonStrings from "../../config/string";
 import Constants from  "../../config/constants"
 
 export default class Splash extends Component {
-
+  static navigationOptions = {
+    headerMode: 'none'
+  };
   constructor(props){
     super(props)
     this.state={
@@ -25,7 +27,7 @@ export default class Splash extends Component {
      if(Constants.isLoggeIn){
       this.props.navigation.navigate('Home');
      }else{
-      this.props.navigation.navigate('Login');
+      this.props.navigation.navigate('Auth');
      }
       
     };

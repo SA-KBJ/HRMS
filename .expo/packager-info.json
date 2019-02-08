@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19005,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 22913,
+  "expoServerNgrokUrl": "https://5t-z5x.anonymous.sahrms.exp.direct",
+  "packagerNgrokUrl": "https://packager.5t-z5x.anonymous.sahrms.exp.direct",
+  "ngrokPid": 22956
 }

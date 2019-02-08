@@ -7,7 +7,21 @@ import dimen from '../../config/dimen'
 import colors from "../../config/colors";
 
 export default class Login extends Component {
+  static navigationOptions = {
+    title: 'Login',
+   
+    headerStyle: {
+      backgroundColor: '#ffffff',
+    },
+  
+    headerTintColor: colors.colorPrimary,
+    headerTitleStyle: {
+width:'90%',
+      fontWeight: 'bold',
+      alignSelf:'center'
 
+    },
+  };
   constructor(props) {
     super(props)
     this.state = {
