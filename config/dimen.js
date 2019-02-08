@@ -26,6 +26,10 @@ const dimen = {
   textBig: 50,
 
 
+  //font size
+  fontNormal : 15,
+  fontSmall : 12,
+  fontLarge:18
 };
 
 export default dimen;

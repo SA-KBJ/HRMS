@@ -1,27 +1,12 @@
 import React from 'react';
-import Setup from './src/boot/setup'
+import { createAppContainer } from "react-navigation";
+import AppNavigator from './views/AppNavigator';
 
-import NewLeave from './views/leave/NewLeave'
-import UpComingHoliday from './views/leave/UpcomingHoliday'
-import MyLeave from './views/leave/MyLeave'
+const App = createAppContainer(AppNavigator);
+export default App;
 
-export default class App extends React.Component {
-  render() {
-    return (
 
-      <MyLeave />
-      // <UpComingHoliday/>
-      // <NewLeave/>
-      // <Setup/>
-    );
-  }
-}
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+
+
+

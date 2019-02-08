@@ -9,12 +9,29 @@
   "dependencies": {
     "expo": "^32.0.0",
     "react": "16.5.0",
+    "react-lifecycles-compat": "^3.0.4",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-elements": "^1.0.0",
-    "react-native-svg": "^9.2.3"
+
+    "react-native-vector-icons": "^8.1.0",
+    "react-navigation": "^3.1.5",
+    "react-navigation-redux-helpers": "^2.0.9"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"
   },
-  "private": true
+  "private": true,
+  "name": "sahrms",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SA-KBJ/HRMS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SA-KBJ/HRMS/issues"
+  },
+  "homepage": "https://github.com/SA-KBJ/HRMS#readme",
+  "description": ""
 }
