@@ -1,15 +1,18 @@
 const colors = {
-    black: '#000000',
-    night: '#333333',
-    
-    white : '#FFFFFF',
-    colorPrimary : '#1E7B8B',
-    colorPrimaryDark : '#ff21648c',
+  black: "#000000",
+  night: "#333333",
 
-    buttonBg: '#FFB233',
-    textTitleGray:"#676A6C",
-    textValueGray :"#A9ABAB",
-    date_icon :"#4592A3"
-  };
+  white: "#FFFFFF",
+  colorPrimary: "#1E7B8B",
+  colorPrimaryDark: "#ff21648c",
 
-  export default colors;
+  buttonBg: "#FFB233",
+  textTitleGray: "#676A6C",
+  textValueGray: "#A9ABAB",
+  date_icon: "#4592A3",
+  reason_icon: "#ffb80a",
+  status_icon: "#ff4c4c",
+  approved_icon: "#36648B"
+};
+
+export default colors;

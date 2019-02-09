@@ -15,6 +15,7 @@ export default appString = {
   lable_do_nothing: 'Do Nothing, GO Back',
   lable_upcoming_holiday: 'Upcoming Public Holidays',
   lable_leave :"Leave : ",
+  lable_show_filter:"Show Filter",
 
   place_holder_reason: 'Would like to attend marriage funcation of friend',
 
