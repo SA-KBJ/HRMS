@@ -94,7 +94,6 @@ export default class NewLeave extends React.Component {
                     onPress={() => this.setState({ isMultipleLeave: !isMultipleLeave })}
                 />
                 <Text style={styles.textTitle}>{this.state.isMultipleLeave ? strings.lable_start_date : strings.lable_date}</Text>
-
                 <TouchableOpacity onPress={() => showDataPicker("start")}>
                     <Input
                         inputStyle={styles.input}
@@ -204,7 +203,6 @@ const styles = StyleSheet.create({
         marginLeft: dimen.marginSmall,
         fontWeight: 'bold',
         fontSize: dimen.textMedium
-
     },
 
     icon: {

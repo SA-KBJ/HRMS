@@ -20,6 +20,7 @@ const dimen = {
   // Text size
   textTiny: 5,
   textSmall: 10,
+  textNormal: 13,
   textMedium: 15,
   textLarge: 20,
   textXlarge: 25,

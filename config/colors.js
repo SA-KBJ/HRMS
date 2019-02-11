@@ -7,12 +7,14 @@ const colors = {
   colorPrimaryDark: "#ff21648c",
 
   buttonBg: "#FFB233",
-  textTitleGray: "#676A6C",
-  textValueGray: "#A9ABAB",
-  date_icon: "#4592A3",
-  reason_icon: "#ffb80a",
-  status_icon: "#ff4c4c",
-  approved_icon: "#36648B"
+
+  textTitleGray: "#292a2b",
+  textValueGray: "#676a6c",
+
+  date_icon: "#1E7B8B",
+  reason_icon: "#d78d15",
+  status_icon: "#c5636f",
+  approved_icon: "#647687"
 };
 
 export default colors;

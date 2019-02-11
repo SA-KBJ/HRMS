@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19003,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 12192,
+  "devToolsPort": 19004,
+  "expoServerPort": 19005,
+  "packagerPort": 19006,
+  "packagerPid": 5630,
   "expoServerNgrokUrl": "https://5t-z5x.anonymous.hrms.exp.direct",
   "packagerNgrokUrl": "https://packager.5t-z5x.anonymous.hrms.exp.direct",
-  "ngrokPid": 8868
+  "ngrokPid": 5646
 }
