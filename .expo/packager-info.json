@@ -1,10 +1,9 @@
 {
   "devToolsPort": 19002,
-
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19004,
+  "packagerPid": 9011,
+  "expoServerNgrokUrl": "https://4u-4rm.anonymous.hrms.exp.direct",
+  "packagerNgrokUrl": "https://packager.4u-4rm.anonymous.hrms.exp.direct",
+  "ngrokPid": 9022
 }
