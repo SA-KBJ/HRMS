@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { View, Alert, Text, Image, StyleSheet } from "react-native";
+import { View,WebView } from "react-native";
 
 export default class Policy extends Component {
 render(){
     return(
-    
-        <Text style ={fontSize= 18 } >Policy</Text>
-    );
+
+        <WebView ref={'webview'} automaticallyAdjustContentInsets={false} source={require("../../assets/policy.html")} />
+
+   );
    
 }
 

@@ -8,7 +8,9 @@ import Tab from '../../config/navigations';
 
 
 class Profile extends React.Component{
-    
+    static navigationOptions = {
+        drawerLabel: 'Profile'
+      }
     render() {
         return (
             <View style={CommonStyle.container} >
