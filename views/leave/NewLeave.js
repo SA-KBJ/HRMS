@@ -3,9 +3,10 @@ import { StyleSheet, Text, View, Picker, TouchableOpacity, DatePickerAndroid, To
 import colors from '../../config/colors'
 import strings from '../../config/string'
 import dimen from '../../config/dimen'
+import constants from "../../config/constants";
 import images from '../../config/images'
 import { CheckBox, Input, Image, Button } from 'react-native-elements'
-
+import CustomDatePicker from "../../customComponent/CustomDatePicker"
 
 export default class NewLeave extends React.Component {
 
@@ -55,24 +56,6 @@ export default class NewLeave extends React.Component {
 
         }
 
-        showDataPicker = async (isfrom) => {
-            try {
-                const { action, year, month, day } = await DatePickerAndroid.open({
-                    date: new Date()
-                });
-                if (action == DatePickerAndroid.dateSetAction) {
-                    console.log(isfrom)
-                    if (isfrom == "start") {
-                        this.setState({ selectedStartDate: day + '/' + month + '/' + year })
-                    } else {
-                        this.setState({ selectedEndDate: day + '/' + month + '/' + year })
-                    }
-                    console.log(day + '/' + month + '/' + year);
-                }
-            } catch ({ code, message }) {
-                console.warn('Cannot open date picker', message);
-            }
-        }
         sendRequestClick = () => {
             if (validate()) {
                 console.log("success")
@@ -82,6 +65,16 @@ export default class NewLeave extends React.Component {
         }
         goBackClick = () => {
             
+        }
+
+
+        const onDateSelect = (date, key) => {
+            if (key == constants.startDate) {
+                this.setState({ selectedStartDate: date })
+            } else {
+                this.setState({ selectedEndDate: date })
+            }
+            console.log("onDateSelect call" + date)
         }
 
         return (
@@ -94,7 +87,7 @@ export default class NewLeave extends React.Component {
                     onPress={() => this.setState({ isMultipleLeave: !isMultipleLeave })}
                 />
                 <Text style={styles.textTitle}>{this.state.isMultipleLeave ? strings.lable_start_date : strings.lable_date}</Text>
-                <TouchableOpacity onPress={() => showDataPicker("start")}>
+                <TouchableOpacity onPress={() => CustomDatePicker(onDateSelect, constants.startDate) }>
                     <Input
                         inputStyle={styles.input}
                         labelStyle={styles.lableInput}
@@ -113,7 +106,7 @@ export default class NewLeave extends React.Component {
                     : null}
 
                 {this.state.isMultipleLeave ?
-                    <TouchableOpacity onPress={() => showDataPicker("end")}>
+                    <TouchableOpacity onPress={() => CustomDatePicker(onDateSelect, constants.endDate) }>
                         <Input
                             inputStyle={styles.input}
                             labelStyle={styles.lableInput}

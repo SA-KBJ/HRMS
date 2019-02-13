@@ -8,8 +8,12 @@ const colors = {
 
   buttonBg: "#FFB233",
 
+  blueShade1:"#EDF3FE",
+  blueShade2:"#9FBFFA",
+
   textTitleGray: "#292a2b",
   textValueGray: "#676a6c",
+  borderColor:"#e0e1e1",
 
   date_icon: "#1E7B8B",
   reason_icon: "#d78d15",

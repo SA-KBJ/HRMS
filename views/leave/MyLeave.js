@@ -5,14 +5,15 @@ import {
     View,
     TouchableWithoutFeedback,
     TouchableOpacity,
-    FlatList, DatePickerAndroid
+    FlatList
 } from "react-native";
 
 import colors from "../../config/colors";
 import strings from "../../config/string";
+import constants from "../../config/constants";
 import dimen from "../../config/dimen";
 import images from "../../config/images";
-import { CheckBox, Input, Image, Button } from "react-native-elements";
+import { CheckBox, Input, SearchBar, Button } from "react-native-elements";
 
 import IconFontAwesome from "react-native-vector-icons/FontAwesome";
 import IconOctions from "react-native-vector-icons/Octicons";
@@ -21,13 +22,15 @@ import IconMaterial from "react-native-vector-icons/MaterialIcons";
 import IconMaterialCommunity from "react-native-vector-icons/MaterialCommunityIcons";
 
 import Modal from "react-native-modal";
+import CustomDatePicker from "../../customComponent/CustomDatePicker"
 
 export default class MyLeave extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             leaveBalance: 0,
-            isFilterVisible: true,
+            searchText: '',
+            isFilterVisible: false,
             selectedStartDate: "",
             selectedEndDate: "",
             filterAll: false,
@@ -89,26 +92,6 @@ export default class MyLeave extends React.Component {
         console.log("item click ${item} " + index + "" + item)
     }
 
-
-    showDataPicker = async (isfrom) => {
-        try {
-            const { action, year, month, day } = await DatePickerAndroid.open({
-                date: new Date()
-            });
-            if (action == DatePickerAndroid.dateSetAction) {
-                console.log(isfrom)
-                if (isfrom == "start") {
-                    this.setState({ selectedStartDate: day + '/' + month + '/' + year })
-                } else {
-                    this.setState({ selectedEndDate: day + '/' + month + '/' + year })
-                }
-                console.log(day + '/' + month + '/' + year);
-            }
-        } catch ({ code, message }) {
-            console.warn('Cannot open date picker', message);
-        }
-    }
-
     rowItem = (item, index) => {
         return (
             <TouchableWithoutFeedback onPress={() => this.leaveItemSelect(item, index)}>
@@ -140,16 +123,25 @@ export default class MyLeave extends React.Component {
     filterLayout = () => {
         resetFilter = () => {
             console.log("reset call")
-            this.setState({selectedStartDate: ""})
-            this.setState({selectedEndDate: ""})
-            this.setState({filterAll: false})
-            this.setState({filterApprovalPending: false})
-            this.setState({filterApproved: false})
-            this.setState({filterCancelled: false})
+            this.setState({ selectedStartDate: "" })
+            this.setState({ selectedEndDate: "" })
+            this.setState({ filterAll: false })
+            this.setState({ filterApprovalPending: false })
+            this.setState({ filterApproved: false })
+            this.setState({ filterCancelled: false })
         }
         searchFilter = () => {
             console.log("search call")
             this.setState({ isFilterVisible: !this.state.isFilterVisible })
+        }
+
+        const onDateSelect = (date, key) => {
+            if (key == constants.startDate) {
+                this.setState({ selectedStartDate: date })
+            } else {
+                this.setState({ selectedEndDate: date })
+            }
+            console.log("onDateSelect call" + date)
         }
 
         return (
@@ -162,7 +154,7 @@ export default class MyLeave extends React.Component {
                     <View style={styles.modelColumnContainer}>
 
                         <Text style={styles.modalDateTitle}>{strings.lable_start_date}</Text>
-                        <TouchableOpacity onPress={() => this.showDataPicker("start")}>
+                        <TouchableOpacity onPress={() => { CustomDatePicker(onDateSelect, constants.startDate) }}>
                             <Input
                                 inputStyle={styles.modelDataInput}
                                 placeholder={strings.select_date}
@@ -175,7 +167,7 @@ export default class MyLeave extends React.Component {
                         </TouchableOpacity>
 
                         <Text style={styles.modalDateTitle}>{strings.lable_end_date}</Text>
-                        <TouchableOpacity onPress={() => this.showDataPicker("end")}>
+                        <TouchableOpacity onPress={() => CustomDatePicker(onDateSelect, constants.endDate)}>
                             <Input
                                 inputStyle={styles.modelDataInput}
                                 placeholder={strings.select_end_date}
@@ -232,6 +224,9 @@ export default class MyLeave extends React.Component {
         )
     }
 
+    searchSubmit =()=>{
+        console.log("submit")
+    }
     render() {
         return (
 
@@ -240,12 +235,18 @@ export default class MyLeave extends React.Component {
                     <Text style={styles.leaveText}>
                         {strings.lable_leave + "" + this.state.leaveBalance}
                     </Text>
-                    <IconAntDesign color={colors.date_icon} name="filter" size={30} onPress={() => this.setState({ isFilterVisible: !this.state.isFilterVisible })} />
-                    {/* <Button
-                        buttonStyle={styles.buttonShowFilter}
-                        title={strings.lable_show_filter}
-                    // onPress={() => { sendRequestClick() }}
-                    /> */}
+
+                    <SearchBar
+                        placeholder="Globle Search .."
+                        onChangeText={(value) => this.setState({ searchText: value })}
+                        value={this.state.searchText}
+                        containerStyle={styles.searchBar}
+                        placeholderTextColor={colors.textValueGray}
+                        onSubmitEditing={this.searchSubmit}
+                        platform='android'
+                    />
+                    <IconAntDesign color={colors.black} name="filter" size={30} onPress={() => this.setState({ isFilterVisible: !this.state.isFilterVisible })} />
+        
                 </View>
                 {this.filterLayout()}
                 <FlatList
@@ -266,7 +267,7 @@ const styles = StyleSheet.create({
     },
     leaveText: {
         fontWeight: "bold",
-        fontSize: dimen.textMedium,
+        fontSize: dimen.textLarge,
         marginTop: dimen.marginSmall,
         marginBottom: dimen.marginSmall,
         color: colors.textTitleGray
@@ -276,6 +277,22 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    searchBar: {
+        flex: 1,
+        marginLeft: dimen.marginSmall,
+        marginRight: dimen.marginSmall,
+        backgroundColor: colors.white,
+        backgroundColor: colors.white,
+        elevation: 1,
+        borderRadius: 5
+
+        // borderBottomColor:colors.textValueGray,
+        // borderBottomWidth:1
+        // borderColor:colors.textValueGray,
+        // borderWidth:1,
+        // borderRadius:3,
+        // elevation:5
     },
     buttonShowFilter: {
         backgroundColor: colors.colorPrimary

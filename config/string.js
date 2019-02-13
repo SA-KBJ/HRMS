@@ -24,8 +24,10 @@ export default appString = {
   lable_filter_cancelled: "Cancelled",
   lable_search: "Search",
   lable_reset: "Reset",
+  lable_modify:"Modify",
+  lable_add_comment:"Comment",
 
-
+  place_holder_enter_comment:"Please enter comment",
   place_holder_reason: 'Would like to attend marriage funcation of friend',
 
   select_date: 'Select Date',
