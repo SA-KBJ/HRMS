@@ -65,7 +65,7 @@ width:'90%',
     )
   }
   navigateToHomePage = () => {
-    this.props.navigation.navigate('Home');
+    this.props.navigation.navigate('HomeScreen');
   }
   navigateToForgotPasswordPage = () => { 
     this.props.navigation.navigate('ForgotPassword');

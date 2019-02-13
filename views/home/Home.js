@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { View, Alert, Text, Image, StyleSheet } from "react-native";
+import { View, Alert, Text, Image,TouchableOpacity, StyleSheet } from "react-native";
 
 export default class Home extends Component {
-    static navigationOptions = {
-        title: 'Home',
-      };
+  
 render(){
     return(
         <View style>
@@ -15,3 +13,5 @@ render(){
 }
 
 }
+
+
